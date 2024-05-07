@@ -26,15 +26,22 @@
      }
     void insertatend(int data)
     {
-        newnode=(struct node*)malloc(sizeof(struct node));
-        newnode->data=data;
-        newnode->next=NULL;
-        temp=head;
-        while(temp->next!=NULL)
+         if(head==NULL)
         {
-            temp=temp->next;
+            insertatbegin(data);
         }
-        temp->next=newnode;
+        else
+        {
+            newnode=(struct node*)malloc(sizeof(struct node));
+            newnode->data=data;
+            newnode->next=NULL;
+            temp=head;
+            while(temp->next!=NULL)
+            {
+                temp=temp->next;
+            }
+            temp->next=newnode;
+        }
     }
     void insertafterposition(int data,int pos,int count)
     {
@@ -79,6 +86,35 @@
             temp->next=newnode;
         }
     }
+    void insertatspecific(int data,int pos,int count)
+    {
+        if(pos<1||pos>count+1)
+        {
+            printf("\n Invalid position");
+        }
+        else if(pos==1)
+        {
+            insertatbegin(data);
+        }
+        else
+        {
+            int i=1;
+            newnode=(struct node*)malloc(sizeof(struct node));
+            newnode->data=data;
+            newnode->next=NULL;
+            temp=head;
+            while(i<pos-1)
+            {
+                temp=temp->next;
+                i++;
+            }
+            newnode->next=temp->next;
+            temp->next=newnode;
+        }
+        
+
+
+    }
     void display()
     {
         printf("\n the elements are : ");
@@ -112,9 +148,10 @@
             printf("\n 2.insert at end");
             printf("\n 3.insert at after a position");
             printf("\n 4.insert at before a position");
-            printf("\n 5.display");
-            printf("\n 6.freelist");
-            printf("\n 7.exit");
+            printf("\n 5.insert at the specific position");
+            printf("\n 6.display");
+            printf("\n 7.freelist");
+            printf("\n 8.exit");
             printf("\n enter your choice : ");
             scanf("%d",&choice);
             switch(choice)
@@ -139,12 +176,19 @@
                             insertbeforeposition(data,pos,count);
                             count++;
                             break;
-                case 5  :  display();
+                case 5  :printf("\n enter the data and position : ");
+                            scanf("%d %d",&data,&pos);
+                            insertatspecific(data,pos,count);
+                            count++;
+                            break;
+                case 6  :  display();
                             printf("\n the total no.of elements are : %d",count);
                             break;
-                case 6  : freelist();
+                case 7  : freelist();
                             printf("\n list is freed");
-                case 7  : exit(0);
+                            count=0;
+                            break;
+                case 8  : exit(0);
                 default : printf("\n Invalid choice");
             }
         }
