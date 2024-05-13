@@ -23,19 +23,22 @@ int main()
             {
                 printf("\n memory allocation failed");
             }
-            printf("\nenter the data : ");
-            scanf("%d",&newnode->data);
-            newnode->next=NULL;
-            if(head==NULL)
-            {
-                head=newnode;
-                temp=newnode;
-            }
             else
             {
-                temp->next=newnode;
-                temp=newnode;
-            }
+                printf("\nenter the data : ");
+                scanf("%d",&newnode->data);
+                newnode->next=NULL;
+                if(head==NULL)
+                {
+                    head=newnode;
+                    temp=newnode;
+                }
+                else
+                {
+                    temp->next=newnode;
+                    temp=newnode;
+                }
+            } 
         }
         else 
         {

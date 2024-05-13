@@ -100,7 +100,7 @@ void display()
     {
         temp=head;
         printf("\n the elements are : ");
-        printf("\n the data\t-->\tthe address");
+        printf("\n the data \t --> \t the address");
         printf("\n the head is : %p",head);
         while(temp!=NULL)
         {
@@ -145,5 +145,6 @@ int main()
             default : printf("\n Invalid choice");
         }
     }
+    return 0;
 
 }
