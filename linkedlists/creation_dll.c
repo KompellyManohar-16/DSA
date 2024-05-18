@@ -22,9 +22,9 @@ int main()
             if(newnode==NULL)
             {
                 printf("\n memory allocation failded");
+                return 0;
             }
-            else
-            {
+        
                 printf("\n enter the data : ");
                 scanf("%d",&newnode->data);
                 newnode->next=NULL;
@@ -40,7 +40,7 @@ int main()
                     newnode->prev=temp;
                     temp=newnode;
                 }
-            }
+            
         }
         else
         {
