@@ -196,6 +196,18 @@ void display()
     }
 }
 
+void free_list()
+{
+    while(head!=NULL)
+    {
+       temp=head;
+       head=head->next;
+       free(temp);
+       count--;
+    }
+}
+
+
 int main()
 {
     int choice,data,pos;
@@ -207,7 +219,8 @@ int main()
         printf("\n 4. insert after a given position");
         printf("\n 5. insert before a given position");
         printf("\n 6. display");
-        printf("\n 7. exit");
+        printf("\n 7. free list");
+        printf("\n 8. exit");
         printf("\n enter your choice : ");
         scanf("%d",&choice);
         switch(choice)
@@ -235,7 +248,10 @@ int main()
             case 6  : display();
                         printf("\n the total no.of nodes are : %d",count);
                         break;
-            case 7  : exit(0);
+            case 7  : free_list();
+                        printf("\n the list is freed");
+                        break;
+            case 8  : exit(0);
             default : printf("\n Invalid choice");
         }
     }
