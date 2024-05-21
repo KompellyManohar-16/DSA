@@ -92,6 +92,11 @@
             printf("\n Invalid position");
             return;
         }
+        if(pos==1)
+        {
+            insert_at_begin(data);
+            return;
+        }
             int i=1;
             newnode=(struct node*)malloc(sizeof(struct node));
             if(newnode==NULL)
@@ -112,6 +117,9 @@
             count++;
         
     }
+
+
+
     void insert_at_specific(int data,int pos)
     {
         if(pos<1||pos>count+1)
