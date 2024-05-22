@@ -81,7 +81,7 @@ void insert_before(int data,int value)
 {
     if(head==NULL)
     {
-        printf("\n the list is empty");
+        printf("\n the list is empty , no creation");
         return;
     }
     newnode=(struct node*)malloc(sizeof(struct node));
