@@ -69,16 +69,15 @@ void delete_at_end()
     temp=head;
     while(temp->next!=NULL)
     {
-        prev=temp;
         temp=temp->next;
     }
-    if(temp==head)
+    if(temp->prev!=NULL)
     {
-        head=NULL;
+        temp->prev->next=NULL;
     }
     else
     {
-        prev->next=NULL;
+        head=NULL;
     }
     printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",temp->prev,temp->data,temp->next);
     free(temp);
@@ -218,7 +217,7 @@ int main()
         scanf("%d",&choice);
         switch(choice)
         {
-            case 1  : printf("\n entet the data : ");
+            case 1  : printf("\n enter the data : ");
                         scanf("%d",&data);
                         insert(data);
                         break;
