@@ -52,14 +52,13 @@ void reverse()
     temp=head;
     while(temp!=NULL)
     {
-        
-        nextnode=temp->next;
-        temp->next=temp->prev;
-        temp->prev=nextnode;
         if(temp->next==NULL)
         {
             head=temp;
         }
+        nextnode=temp->next;
+        temp->next=temp->prev;
+        temp->prev=nextnode;
         temp=nextnode;
     }
     printf("\n the double linked list is reversed");
@@ -84,6 +83,18 @@ void display()
     }
 }
 
+void free_list()
+{
+    while(head!=NULL)
+    {
+        temp=head;
+        head=head->next;
+        free(temp);
+    }
+    head=NULL;
+    count=0;
+}
+
 int main()
 {
     int choice,data;
@@ -106,7 +117,9 @@ int main()
             case 3  : display();
                         printf("\n the total no.of nodes are : %d",count);
                         break;
-            case 4  : exit(0);
+            case 4  : free_list();
+                        printf("\n Exiting....");
+                        return 0;
             default : printf("\n Invalid choice");
         }
     }
