@@ -37,8 +37,8 @@ void insert(int data)
         }
         temp->next=newnode;
         newnode->prev=temp;
-        count++;
     }
+    count++;
 }
 
 void delete_specific(int value)
