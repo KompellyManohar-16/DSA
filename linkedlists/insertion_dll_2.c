@@ -73,7 +73,7 @@ void insert_after(int data,int value)
         }
         temp=temp->next;
     }
-    printf("\n the given node value is not found , no insertion");
+    printf("\n the given node value %d is not found , no insertion",value);
     free(newnode);
 }
 
@@ -115,7 +115,7 @@ void insert_before(int data,int value)
         }
         temp=temp->next;
     }
-    printf("\n the given node is not found , no insertion");
+    printf("\n the given node %d is not found , no insertion",value);
     free(newnode);    
 }
 

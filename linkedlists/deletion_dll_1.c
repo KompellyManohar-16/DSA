@@ -65,7 +65,6 @@ void delete_at_end()
         printf("\n the list is empty");
         return;
     }
-    struct node *prev=NULL;
     temp=head;
     while(temp->next!=NULL)
     {
