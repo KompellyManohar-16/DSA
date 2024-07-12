@@ -65,6 +65,7 @@ void delete_at_end()
         printf("\n the list is empty");
         return;
     }
+    
     temp=head;
     while(temp->next!=NULL)
     {

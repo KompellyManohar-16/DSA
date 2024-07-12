@@ -66,11 +66,11 @@ void delete_specific(int value)
     {
         if(temp->data==value)
         {
+            temp->prev->next=temp->next;
             if(temp->next!=NULL)
             {
                 temp->next->prev=temp->prev;
             }
-            temp->prev->next=temp->next;
             printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",temp->prev,temp->data,temp->next);
             free(temp);
             count--;
@@ -97,11 +97,11 @@ void delete_after(int value)
             nextnode=temp->next;
             if(nextnode!=NULL)
             {
+                temp->next=nextnode->next;
                 if(nextnode->next!=NULL)
                 {
                     nextnode->next->prev=temp;
                 }
-                temp->next=nextnode->next;
                 printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",nextnode->prev,nextnode->data,nextnode->next);
                 free(nextnode);
                 count--;
@@ -124,6 +124,7 @@ void delete_before(int value)
     }
     if(head!=NULL&&head->data==value)
     {
+
         printf("\n the given node is found but it is the starting of the  list , no node before it \n no deletion");
         return;
     }
@@ -134,6 +135,7 @@ void delete_before(int value)
         if(temp->data==value)
         {
             prevnode=temp->prev;
+            temp->prev=prevnode->prev;
             if(prevnode->prev!=NULL)
             {
                     prevnode->prev->next=temp;
@@ -142,7 +144,6 @@ void delete_before(int value)
             {
                 head=temp;
             }
-            temp->prev=prevnode->prev;
             printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",prevnode->prev,prevnode->data,prevnode->next);
             free(prevnode);
             count--;
