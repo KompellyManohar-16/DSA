@@ -1,0 +1,16 @@
+case 2  : delete_at_begin();
+            //             break;
+            // case 3  : delete_at_end();
+            //             break;
+            // case 4  : printf("\n enter the position : ");
+            //             scanf("%d",&pos);
+            //             delete_at_specific_pos(pos);
+            //             break;
+            // case 5  : printf("\n enter the position : ");
+            //             scanf("%d",&pos);
+            //             delete_after_pos(pos);
+            //             break;
+            // case 6  : printf("\n enter the position :");
+            //             scanf("%d",&pos);
+            //             delete_before_pos(pos);
+            //             break;
