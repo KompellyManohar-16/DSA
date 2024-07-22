@@ -4,14 +4,15 @@
 struct node
 {
     int data;
-    struct node *next;
-    struct node *prev;
+    struct node*next;
 };
+
+int count=0;
+
 struct node *head=NULL;
 struct node *newnode=NULL;
 struct node *temp=NULL;
 
-int count=0;
 
 void insert(int data)
 {
@@ -22,99 +23,102 @@ void insert(int data)
         return;
     }
     newnode->data=data;
-    newnode->prev=NULL;
     newnode->next=NULL;
     if(head==NULL)
     {
         head=newnode;
+        newnode->next=head;
     }
     else
     {
         temp=head;
-        while(temp->next!=NULL)
+        while(temp->next!=head)
         {
             temp=temp->next;
         }
         temp->next=newnode;
-        newnode->prev=temp;
+        newnode->next=head;
     }
     count++;
 }
 
-void delete_specific(int value)
+void delete_spec(int value)
 {
     if(head==NULL)
     {
         printf("\n the list is empty");
         return;
     }
-    if(head!=NULL&&head->data==value)
+    if(head->data==value)
     {
         temp=head;
-        head=head->next;
-        if(head!=NULL)
+        if(head->next==head)
         {
-            head->prev=NULL;
+            head=NULL;
         }
-        printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",temp->prev,temp->data,temp->next);
+        else
+        {
+            struct node *end=head;
+            while(end->next!=head)
+            {
+                end=end->next;
+            } 
+            head=head->next;
+            end->next=head;
+        }
+        printf("\n the deleted node is : %d\t-->\t%p",temp->data,temp->next);
         free(temp);
         count--;
         return;
     }
     temp=head;
-    while(temp!=NULL)
+    struct node *prev=head;
+    do
     {
         if(temp->data==value)
         {
-            temp->prev->next=temp->next;
-            if(temp->next!=NULL)
-            {
-                temp->next->prev=temp->prev;
-            }
-            printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",temp->prev,temp->data,temp->next);
+            prev->next=temp->next;
+            printf("\n the deleted node is : %d\t-->\t%p",temp->data,temp->next);
             free(temp);
             count--;
             return;
         }
+        prev=temp;
         temp=temp->next;
-    }
-    printf("\n the node value is not found in the list , no deletion");
+    } while (temp!=head);
+    printf("\n the specified node %d is not found in the list, no deletion",value);
 }
+
 
 void delete_after(int value)
 {
     if(head==NULL)
     {
-        printf("\n the list  is empty");
+        printf("\n the list is empty");
         return;
     }
-    struct node *nextnode=NULL;
     temp=head;
-    while(temp!=NULL)
+    struct node *nextnode=NULL;
+    do
     {
         if(temp->data==value)
         {
-            nextnode=temp->next;
-            if(nextnode!=NULL)
+            if(temp->next==head)
             {
-                temp->next=nextnode->next;
-                if(nextnode->next!=NULL)
-                {
-                    nextnode->next->prev=temp;
-                }
-                printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",nextnode->prev,nextnode->data,nextnode->next);
-                free(nextnode);
-                count--;
+                printf("\n the specified node %d is found but it is end of the list , no deletion",value);
                 return;
             }
-            printf("\n the given node is found but it is end of the list , no deletion");
+            nextnode=temp->next;
+            temp->next=nextnode->next;
+            printf("\n the deleted node is : %d\t-->\t%p",nextnode->data,nextnode->next);
+            free(nextnode);
+            count--;
             return;
         }
         temp=temp->next;
-    }
-    printf("\n the node is not found in the list");
+    }while(temp!=head);
+    printf("\n the specified node %d is not found in the list, no deletion",value);
 }
-
 
 
 void delete_before(int value)
@@ -124,69 +128,77 @@ void delete_before(int value)
         printf("\n the list is empty");
         return;
     }
-    if(head!=NULL&&head->data==value)
+    if(head->data==value)
     {
-
-        printf("\n the given node is found but it is the starting of the  list , no node before it \n no deletion");
+        printf("\n the specified node %d is found but it is the beginning of the list, no deletion",value);
         return;
     }
-    struct node *prevnode=NULL;
     temp=head;
-    while(temp!=NULL)
+    struct node *end=head;
+    struct node *prev=NULL;
+    struct  node *node_to_delete=NULL;
+    do
     {
         if(temp->data==value)
         {
-            prevnode=temp->prev;
-            temp->prev=prevnode->prev;
-            if(prevnode->prev!=NULL)
+            if(node_to_delete==head)
             {
-                    prevnode->prev->next=temp;
-            }
+                while(end->next!=head)
+                {
+                    end=end->next;
+                }   
+                head=head->next;
+                end->next=head;
+            }           
             else
             {
-                head=temp;
+                prev->next=node_to_delete->next; 
             }
-            printf("\n the deleted node is : %p \t <-- \t %d \t --> \t %p",prevnode->prev,prevnode->data,prevnode->next);
-            free(prevnode);
+            printf("\n the deleted node is : %d\t-->\t%p",node_to_delete->data,node_to_delete->next);
+            free(node_to_delete);
             count--;
             return;
         }
+        prev=node_to_delete;
+        node_to_delete=temp;
         temp=temp->next;
-    }
-    printf("\n the given node is not found in the list");
+    } while (temp!=head);
+    printf("\n the specified node %d is not found in the list, no deletion",value);
 }
+
+
 
 void display()
 {
     if(head==NULL)
     {
         printf("\n the list is empty");
-        printf("\n the head is : %p",head);
+        printf("\n the head is %p",head);
         return;
     }
-    temp=head;
     printf("\n the nodes are : ");
-    printf("\n the prev \t <-- \t the data \t --> \t the next");
     printf("\n the head is : %p",head);
-    while(temp!=NULL)
+    temp=head;
+    do
     {
-        printf("\n %p \t <-- \t %d \t --> \t %p",temp->prev,temp->data,temp->next);
+        printf("\n %d\t-->\t%p",temp->data,temp->next);
         temp=temp->next;
-    }
+    } while (temp!=head);
 }
+
 
 int main()
 {
-    int choice,data,value;
+    int data,value,choice;
     while(1)
     {
         printf("\n 1. insert");
-        printf("\n 2. delete a specific node");
-        printf("\n 3. delete after a given node");
-        printf("\n 4. delete before a given node");
+        printf("\n 2. deletion of specific node");
+        printf("\n 3. deletion after a node");
+        printf("\n 4. deletion before a node");
         printf("\n 5. display");
         printf("\n 6. exit");
-        printf("\n enter the your choice : ");
+        printf("\n enter your choice : ");
         scanf("%d",&choice);
         switch(choice)
         {
@@ -196,7 +208,7 @@ int main()
                         break;
             case 2  : printf("\n enter the value : ");
                         scanf("%d",&value);
-                        delete_specific(value);
+                        delete_spec(value);
                         break;
             case 3  : printf("\n enter the value : ");
                         scanf("%d",&value);
@@ -213,5 +225,4 @@ int main()
             default : printf("\n Invalid choice");
         }
     }
-    return 0;
 }
