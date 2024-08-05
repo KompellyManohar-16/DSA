@@ -41,7 +41,7 @@ void peek()
     }
     else
     {
-        printf("\n the topmost element is : %d",a[top]);
+        printf("\n the top most element is : %d",a[top]);
     }
 }
 
@@ -103,11 +103,22 @@ int main()
         printf("\n 6. isFull");
         printf("\n 7. exit");
         printf("\n enter your choice : ");
-        scanf("%d",&choice);
+        if (scanf("%d", &choice) != 1)  // Check if the input is a valid integer
+        {
+            printf("\nInvalid input. Please enter a number.");
+            // Clear the input buffer
+            while (getchar() != '\n');
+                continue;
+        }
         switch(choice)
         {
             case 1  : printf("\n enter the data : ");
-                        scanf("%d",&data);
+                       if (scanf("%d", &data) != 1)
+                        {
+                            printf("\nInvalid input. Please enter a valid number.");
+                            while (getchar() != '\n');
+                            continue;
+                        }
                         push(data);
                         break;
             case 2  : pop();
