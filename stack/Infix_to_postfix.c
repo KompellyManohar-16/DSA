@@ -23,21 +23,17 @@ void infix_to_postfix(char s[])
         char c=s[i];
         if(c>='a'&&c<='z' || c>='A'&&c<='Z' || c>='0'&&c<='9')
         {
-            postfix[index]=c;
-            index++;
+            postfix[index++]=c;
         }
         else if(c=='(')
         {
-            top++;
-            stack[top]=c;
+            stack[++top]=c;
         }
         else if(c==')')
         {
             while(top>=0 && stack[top]!='(')
             {
-                postfix[index]=stack[top];
-                index++;
-                top--;
+                postfix[index++]=stack[top--];
             }
             top--;
         }
@@ -45,19 +41,14 @@ void infix_to_postfix(char s[])
         {
             while(top>=0 && ((precedence(c) < precedence(stack[top])) || (precedence(c) == precedence(stack[top]) && associativity(c)=='L')))
             {
-                postfix[index]=stack[top];
-                index++;
-                top--;
+                postfix[index++]=stack[top--];
             }
-            top++;
-            stack[top]=c;
+            stack[++top]=c;
         }
     }
     while(top>=0)
     {
-        postfix[index]=stack[top];
-        index++;
-        top--;
+        postfix[index++]=stack[top--];
     }
     postfix[index]='\0';
     printf("\n the postfix expression is : %s",postfix);
