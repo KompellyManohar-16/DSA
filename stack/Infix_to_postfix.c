@@ -74,7 +74,7 @@ char associativity(char c)
 
 int main()
 {
-    char a[50]="a+b-c*d/e^f";
+    char a[50]="5*(4-2+2)-6/3";
     printf("\n the Infix expression is : %s",a);
     infix_to_postfix(a);
     return 0;
