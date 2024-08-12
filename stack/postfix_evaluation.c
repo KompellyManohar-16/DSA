@@ -85,7 +85,7 @@ int postfix_evaluation(char a[])
 
 int main()
 {
-    char postfix[]="150 30 12 * 75 / 60 20 * + 100 - +";
+    char postfix[]="100 50 25 / 10 + 5 * -";
     printf("\n the postfix expression is : %s",postfix);
     int res=postfix_evaluation(postfix);
     printf("\n the result is : %d",res);
