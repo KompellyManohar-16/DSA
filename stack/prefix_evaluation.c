@@ -103,7 +103,7 @@ int prefix_evaluation(char a[])
 
 int main()
 {
-    char prefix[]="- + 2 * 3 4 / 16 ^ 2 3";
+    char prefix[]="* - 1000 500 + 200 300";
     int res=prefix_evaluation(prefix);
     printf("\n the reslut is %d",res);
     return 0;
