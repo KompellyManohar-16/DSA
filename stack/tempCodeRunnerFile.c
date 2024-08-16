@@ -1,1 +1,1 @@
- i--;
+ char postfix[]="ABC*+D/";

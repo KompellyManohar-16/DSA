@@ -44,6 +44,11 @@ int postfix_evaluation(char a[])
         }
         else if(a[i]=='^' || a[i]=='/' || a[i]=='*' || a[i]=='+' || a[i]=='-')
         {
+            if(top<1)
+            {
+                printf("\n invalid postfix expression");
+                return -1;
+            }
             int result;
             int operand2=stack[top--];
             int operand1=stack[top--];
