@@ -75,6 +75,12 @@ void postfix_to_infix(char postfix[])
             free(operand1);
             free(operand2);
         }
+        else
+        {
+            printf("\n Invalid postfix expression");
+            free_stack(&stack);
+            return;
+        }
     }
     if(stack.top==0)
     {
