@@ -39,7 +39,7 @@ void prefix_to_infix(char prefix[])
     for(int i=length-1;i>=0;i--)
     {
         char ch=prefix[i];
-        printf("\n %c",ch);
+        printf("\n %c  %p",ch,&ch);
 
         if(ch>='a' && ch<='z' || ch>='A' && ch<='Z' || ch>='0' && ch<='9')
         {
@@ -50,9 +50,18 @@ void prefix_to_infix(char prefix[])
                 return;
             }
             char *operand=(char*)malloc(2*sizeof(char));
+            printf("\n operand is : %p",operand);
+            printf("\n &operand is : %p",&operand);
             operand[0]=ch;
             operand[1]='\0';
+            printf("\n the ch is : %p",&ch);
+            printf("\n operand is : %p",operand);
+            printf("\n &operand is : %p",&operand);
+            printf("\n *operand is : %c",*operand);
+            printf("\n operand[0] is : %c",operand[0]);
+            printf("\n &operand[0] is : %p",&operand[0]);
             stack.items[++stack.top]=operand;
+            printf("\n the stack is : %p",stack.items[stack.top]);
         }
         else if(ch=='^' || ch=='/' || ch=='*' || ch=='+' || ch=='-')
         {
@@ -70,6 +79,9 @@ void prefix_to_infix(char prefix[])
             sprintf(expression, "(%s%c%s)",operand1,ch,operand2);
 
             stack.items[++stack.top]=expression;
+
+            printf("\n the top of stack is : %p",stack.items[stack.top]);
+            printf("\n the expression is : %s",stack.items[stack.top]);
 
             free(operand1);
             free(operand2);
