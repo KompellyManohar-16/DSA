@@ -1,1 +1,1 @@
- char postfix[]="ABC*+D/";
+(({}[]))
