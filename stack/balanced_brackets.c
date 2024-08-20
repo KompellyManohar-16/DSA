@@ -41,11 +41,11 @@ void balanced_brackets(char brackets[])
                 return;
             }
         }
-        else
-        {
-            printf("\n INVALID EXPRESSION");
-            return;
-        }
+        // else
+        // {
+        //     printf("\n INVALID EXPRESSION");
+        //     return;
+        // }
     }
     if(top<0)
     {
@@ -59,7 +59,7 @@ void balanced_brackets(char brackets[])
 
 int main()
 {
-    char expression[]="(({}[]))";      // for NOT BALANCED expression is :({)}[]
+    char expression[]="(({8-9}[8*7])22)";      // for NOT BALANCED expression is :({)}[]
     printf("\n the brackets are : %s",expression);
     printf("\n the length is : %d",strlen(expression));
     balanced_brackets(expression);
