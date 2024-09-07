@@ -9,7 +9,7 @@ int main()
     scanf("%d %d",&row2,&col2);
     if(col1!=row2)
     {
-        printf("\n matrix multiplication is not possible");
+        printf("\n the matrix multiplication is not possible");
         return -1;
     }
     printf("\n enter the values of matrix1 : \n");
