@@ -1,7 +1,8 @@
 #include<stdio.h>
 int main()
 {
-    int arr[10][10],row,col;
+    int arr[10][10];
+    int row,col;
     printf("\n enter the no.of rows and columns : ");
     scanf("%d %d",&row,&col);
     printf("\n enter the values of matrix : ");
