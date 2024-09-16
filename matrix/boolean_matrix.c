@@ -22,7 +22,15 @@ int main()
         }
         printf("\n");
     }
-    int row_no[row]={0},col_no[col]={0};
+    int row_no[row],col_no[col];
+    for(int i=0;i<row;i++)
+    {
+        row_no[i]=0;
+    }
+    for(int i=0;i<col;i++)
+    {
+        col_no[i]=0;
+    }
     for(int i=0;i<row;i++)
     {
         for(int j=0;j<col;j++)
