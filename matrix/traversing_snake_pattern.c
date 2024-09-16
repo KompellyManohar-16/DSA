@@ -1,4 +1,5 @@
 #include<stdio.h>
+ 
 int main()
 {
     int arr[10][10],row,col;
@@ -38,7 +39,6 @@ int main()
                     printf("%d\t",arr[i][j]);
                 }
         }
-        printf("\n");
     }
     return 0;
 }
