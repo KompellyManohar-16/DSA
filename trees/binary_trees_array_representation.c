@@ -107,7 +107,7 @@ int main()
     }
 
     no_of_nodes++;
-    printf("\n the root node is : %c",binary[0]);
+    printf("\n The Root node is : %c",binary[0]);
   
 
     for(int i=0;i<=array_index;i++)
