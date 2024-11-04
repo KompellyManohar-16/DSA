@@ -1,6 +1,6 @@
 #include<stdio.h> 
 #include<stdlib.h>
-#define MAX 100
+#define MAX 101
 
 struct node
 {
