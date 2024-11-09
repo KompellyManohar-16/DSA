@@ -72,6 +72,13 @@ struct node * build_tree(int pre_order[], int in_order[], int start, int end, in
 
     int in_index=search(in_order,start,end,current);
 
+    if(in_index==-1)
+    {
+        printf("\n Inconsistent input data , %d is not found in the in-order array \n",current);
+        exit(EXIT_FAILURE);
+    }
+
+    
     newnode->left=build_tree(pre_order, in_order, start, in_index-1, pre_index);
     newnode->right=build_tree(pre_order, in_order, in_index+1, end, pre_index);
 
@@ -162,10 +169,10 @@ int main()
     int pre_index=0;
     root=build_tree(pre_order, in_order, 0, n-1, &pre_index);
 
-    printf("\n\n the pre-order traversal is : \n");
+    printf("\n\n The pre-order traversal is : \n");
     print_PreOrder(root);
 
-    printf("\n\n the in-order traversal is : \n");
+    printf("\n\n The in-order traversal is : \n");
     print_InOrder(root);
 
     return 0;
