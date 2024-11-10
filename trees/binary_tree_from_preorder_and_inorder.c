@@ -124,6 +124,17 @@ void print_InOrder(struct node * root)
 
 }
 
+void free_tree(struct node *root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    free_tree(root->left);
+    free_tree(root->right);
+    free(root);
+}
+
 // step 1 : take preorder and inorder traversal as inputs from the user
 // step 2 : display the preorder and inorder traversal 
 // step 3 : now initialize the pre_Index variable for accessing the pre_order array
@@ -174,6 +185,9 @@ int main()
 
     printf("\n\n The in-order traversal is : \n");
     print_InOrder(root);
+
+    free_tree(root);
+    root=NULL;
 
     return 0;
 }
