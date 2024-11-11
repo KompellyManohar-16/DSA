@@ -149,7 +149,7 @@ void free_tree(struct node *root)
 // step 4 : now call the build tree 
 // step 5 : call post-order traversal function
 // step 6 : call in-order traversal function
-// step 7 : call free_tree function
+// step 7 : call the free_tree function
 
 int main()
 {
