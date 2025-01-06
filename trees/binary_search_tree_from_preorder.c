@@ -2,6 +2,9 @@
 #include<stdlib.h>
 #define MAX 100
 
+struct node *find_min(struct node *root);
+
+
 struct node
 {
     int data;
@@ -96,6 +99,72 @@ void print_InOrder(struct node *root)
     print_InOrder(root->right);
 }
 
+
+struct node * delete_key(struct node * root, int key)
+{
+    if(root==NULL)
+    {
+        printf("\n the key %d is not found in the binary search tree",key);
+        return NULL;
+    }
+
+    if(key < root->data)
+    {
+        root->left=delete_key(root->left,key);
+    }
+    else if(key > root->data)
+    {
+        root->right=delete_key(root->right,key);
+    }
+    else
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            free(root);
+            printf("\n The element %d is deleted",key);
+            return NULL;
+        }
+        else if(root->left==NULL)
+        {
+            struct node *temp=root->right;
+
+            free(root);
+            printf("\n The element %d is deleted",key);
+           
+            return temp;
+        }
+        else if(root->right==NULL)
+        {
+            struct node *temp=root->left;
+
+            free(root);
+            printf("\n The element %d is deleted",key);
+
+            return temp;
+        }
+        else
+        {
+            struct node *temp=find_min(root->right);
+
+            root->data=temp->data;
+            printf("\n the key %d is replaced with it's in-order successor %d",key,temp->data);
+            root->right=delete_key(root->right,temp->data);
+
+        }
+    }
+
+    return root;
+}
+
+struct node *find_min(struct node *root)
+{
+    while(root->left!=NULL)
+    {
+        root=root->left;
+    }
+    return root;
+}
+
 void free_tree(struct node *root)
 {
     if(root==NULL)
@@ -112,40 +181,108 @@ void free_tree(struct node *root)
 
 int main()
 {
-    int pre_order[MAX];
-    int n;
-    printf("\n enter the no.of nodes in the binary search tree :");
-    scanf("%d",&n);
-
-    if(n<=0 || n>MAX)
+    int choice;
+   while(1)
     {
-        printf("\n Invalid no of nodes");
-        return 0;
+        printf("\n\n 1. create binary search tree");
+        printf("\n 2. pre-order traversal");
+        printf("\n 3. in-order traversal");
+        printf("\n 4. deletion");
+        printf("\n 5. free tree");
+        printf("\n 6. exit");
+        printf("\n enter your choice : ");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1  :     
+            {
+                            if(root!=NULL)
+                            {
+                                printf("\n a tree is already existing.. freeing the tree before creating a new one");
+                                free_tree(root);
+                                root=NULL;
+                            }
+
+                            int pre_order[MAX];
+                            int n;
+                            printf("\n enter the no.of nodes in the binary search tree :");
+                            scanf("%d",&n);
+
+                            if(n<=0 || n>MAX)
+                            {
+                                printf("\n Invalid no of nodes.. please enter a valid value between 1 and %d ",MAX);
+                                break;
+                            }
+
+                            printf("\n enter the pre_order traversal : ");
+                            for(int i=0;i<n;i++)
+                            {
+                                scanf("%d",&pre_order[i]);
+                            }
+                            printf("\n The pre_order traversal is : ");
+                            for(int i=0;i<n;i++)
+                            {
+                                printf("%d ",pre_order[i]);
+                            }
+
+                            int pre_index=0;
+
+                            root=build_tree(pre_order,0,n-1,&pre_index);
+                            break;
+            }
+            case 2  : if(root==NULL)
+                        {
+                            printf("\n The tree is empty");
+                        }
+                        else
+                        {
+                             printf("\n\n The pre-order traversal is : ");
+                            print_PreOrder(root);
+                        }
+                        break;
+
+            case 3  : if(root==NULL)
+                        {
+                            printf("\n The tree is empty");
+                        }
+                        else
+                        {
+                            printf("\n\n The in-order traversal is : ");
+                            print_InOrder(root);
+                        }
+                        break;
+                        
+            case 4  : if(root==NULL)
+                        {
+                            printf("\n The tree is empty");
+                        }
+                        else
+                        {
+                            int key;
+                            printf("\n enter the key to delete :");
+                            scanf("%d",&key);
+                            root=delete_key(root,key);
+                        }
+                        break;
+
+            case 5  : if(root==NULL)
+                        {
+                            printf("\n The tree is empty");
+                        }
+                        else
+                        {
+                            free_tree(root);
+                            root=NULL;
+                            printf("\n the tree is freed");
+                        }
+                        break;
+
+            case 6  :   free_tree(root);
+                        printf("\n exiting...!");
+                        return 0;
+
+            default : printf("\n Invalid choice");
+        }
     }
-
-    printf("\n enter the pre_order traversal : ");
-    for(int i=0;i<n;i++)
-    {
-        scanf("%d",&pre_order[i]);
-    }
-    printf("\n The pre_order traversal is : ");
-    for(int i=0;i<n;i++)
-    {
-        printf("%d ",pre_order[i]);
-    }
-
-    int pre_index=0;
-
-    root=build_tree(pre_order,0,n-1,&pre_index);
-
-    printf("\n\n The pre-order traversal is : ");
-    print_PreOrder(root);
-
-    printf("\n\n The in-order traversal is : ");
-    print_InOrder(root);
-
-    free_tree(root);
-    root=NULL;
-
     return 0;
 }
