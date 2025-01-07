@@ -2,8 +2,6 @@
 #include<stdlib.h>
 #define MAX 100
 
-struct node *find_min(struct node *root);
-
 
 struct node
 {
@@ -12,6 +10,8 @@ struct node
     struct node *right;
 };
 struct node *root=NULL;
+
+struct node *find_min(struct node *root);
 
 int max(int pre_order[],int start, int end, int data)
 {
@@ -27,10 +27,10 @@ int max(int pre_order[],int start, int end, int data)
 }
 
 
-struct node * build_tree(int pre_order[], int start, int end, int *pre_index)
+struct node * build_tree(int pre_order[], int start, int end, int *pre_index, int n)
 {
 
-    if(start > end)
+    if(start > end || *pre_index>=n)
     {
         return NULL;
     }
@@ -227,7 +227,7 @@ int main()
 
                             int pre_index=0;
 
-                            root=build_tree(pre_order,0,n-1,&pre_index);
+                            root=build_tree(pre_order,0,n-1,&pre_index,n);
                             break;
             }
             case 2  : if(root==NULL)
