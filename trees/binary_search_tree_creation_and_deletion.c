@@ -14,22 +14,25 @@ struct node *min(struct node *root);
 
 struct node *insert(struct node *root, int data)
 {
-    struct node *newnode=NULL;
-    newnode=(struct node *)malloc(sizeof(struct node));
-    if(newnode==NULL)
-    {
-        printf("\n memory allocation failed");
-        exit(EXIT_FAILURE);
-    }
-
-    newnode->data=data;
-    newnode->left=NULL;
-    newnode->right=NULL;
 
     if(root==NULL)
     {
+        struct node *newnode=NULL;
+        newnode=(struct node *)malloc(sizeof(struct node));
+        if(newnode==NULL)
+        {
+            printf("\n memory allocation failed");
+            exit(EXIT_FAILURE);
+        }
+
+        newnode->data=data;
+        newnode->left=NULL;
+        newnode->right=NULL;
+
         return newnode;
     }
+
+    
 
     if(data < root->data)
     {
