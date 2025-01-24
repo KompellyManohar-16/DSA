@@ -15,7 +15,7 @@ void dfs(int adj[MAX][MAX], int no_of_vertices, int start)
         printf("%d ",current);
         visited[current]=1;
 
-        for(int i=0;i<no_of_vertices;i++)  //for(int i=0;i<no_of_vertices;i++)
+        for(int i=0;i<no_of_vertices;i++)  //for(int i=no_of_vertices-1 ;i>=0; i--)
         {
             if(adj[current][i]==1 && !visited[i])
             {
