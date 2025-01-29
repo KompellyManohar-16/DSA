@@ -98,7 +98,7 @@ int main()
 
     if( is_bipartite_graph(arr,row,col_size) )
     {
-        printf("\n The graph is a bartite graph");
+        printf("\n The graph is a bipartite graph");
     }
     else
     {
