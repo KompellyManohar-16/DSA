@@ -7,19 +7,18 @@ void dfs(int adj[MAX][MAX], int no_of_vertices, int start)
     int visited[MAX]={0};
 
     stack[++top]=start;
-
+    visited[start]=1;
     while(top>=0)
     {
         int current=stack[top--];
-
         printf("%d ",current);
-        visited[current]=1;
 
         for(int i=0;i<no_of_vertices;i++)  //for(int i=no_of_vertices-1 ;i>=0; i--)
         {
             if(adj[current][i]==1 && !visited[i])
             {
                 stack[++top]=i;
+                visited[i]=1;
             }
         }
     }
