@@ -64,6 +64,14 @@ int *dijkstra(struct graph *g, int vertices, int source)
             temp = temp->next;
         }
     }
+
+    for(int i=0; i<vertices; i++)
+    {
+        if(dist[i] == INFINITY)
+        {
+            dist[i]=-1;
+        }
+    }
     return dist;
 }
 
@@ -131,7 +139,7 @@ void create_graph(struct graph *g, int edges)
         struct node *newnode1 = (struct node *)malloc(sizeof(struct node));
         if(!newnode1)
         {
-            printf("\n memory allocation failde..\n");
+            printf("\n memory allocation failed..\n");
             exit(EXIT_FAILURE);
         }
         newnode1->data = dest;
