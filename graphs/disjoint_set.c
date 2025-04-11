@@ -55,7 +55,7 @@ int * disjoint_set(struct edge *arr, int e, int v)
             rank[ult_parent_u]++;
         }
 
-        printf("\n For vertices %d - %d : ",vertex_1,vertex_2);
+        printf("\n After union of the vertices %d - %d the parent is : ",vertex_1,vertex_2);
         for(int k=0;k<v;k++)
         {
             printf("%d ",parent[k]);
