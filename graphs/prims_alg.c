@@ -35,14 +35,14 @@ struct queue_node
     struct queue_node *next;
 };
 
-struct MST *prims_alg(struct graph *g, int n, int e);
+struct MST *prims_alg(struct graph *g, int n);
 struct queue_node *enqueue(struct queue_node *pq, int wt, int nd, int pt);
 int is_empty(struct queue_node *pq);
 struct queue_node *dequeue(struct queue_node **pq);
 void create_graph(struct graph *g, int e);
 
 
-struct MST *prims_alg(struct graph *g, int n, int e)
+struct MST *prims_alg(struct graph *g, int n)
 {
     int *visited = (int *)calloc(n, sizeof(int));
 
@@ -228,7 +228,7 @@ int main()
     }
 
 
-    struct MST *tree = prims_alg(g,n,e);
+    struct MST *tree = prims_alg(g,n);
 
     printf("\n The Minimum Spanning Tree is : \n");
     for(int i=0; i<tree->size; i++)
