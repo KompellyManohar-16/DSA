@@ -9,6 +9,7 @@ struct edge
 };
 
 int * disjoint_set(struct edge *arr, int e, int v);
+void union_by_rank(int *parent, int *rank, struct edge *arr, int v, int e);
 int find_ult_parent(int *parent, int node);
 
 int * disjoint_set(struct edge *arr, int e, int v)
@@ -20,14 +21,22 @@ int * disjoint_set(struct edge *arr, int e, int v)
         rank[i] = 0;
         parent[i] = i;
     }
-
     printf("\n The parent initially is : \n");
     for(int i=0;i<v;i++)
     {
         printf("%d ",parent[i]);
     }
 
-    // Union By Rank
+    union_by_rank(parent, rank, arr, v, e);
+
+    free(rank);
+    return parent;
+}
+
+
+void union_by_rank(int *parent, int *rank, struct edge *arr, int v, int e)
+{
+     // Union By Rank
     for(int i=0; i<e; i++)
     {
         int vertex_1 = arr[i].u;
@@ -49,21 +58,17 @@ int * disjoint_set(struct edge *arr, int e, int v)
         {
             parent[ult_parent_v] = ult_parent_u;
         }
-        else if( rank[ult_parent_u] == rank[ult_parent_v] )
+        else //  rank[ult_parent_u] == rank[ult_parent_v] 
         {
             parent[ult_parent_v] = ult_parent_u;
             rank[ult_parent_u]++;
         }
-
         printf("\n After union of the vertices %d - %d the parent is : ",vertex_1,vertex_2);
         for(int k=0;k<v;k++)
         {
             printf("%d ",parent[k]);
         }
     }
-
-    free(rank);
-    return parent;
 }
 
 int find_ult_parent(int *parent, int node)
