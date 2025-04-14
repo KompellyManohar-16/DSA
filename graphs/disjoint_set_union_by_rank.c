@@ -9,7 +9,7 @@ struct edge
 };
 
 int * disjoint_set(struct edge *arr, int e, int v);
-void union_by_rank(int *parent, int *rank, struct edge *arr, int v, int e);
+void union_by_rank(int *parent, int *rank, int vertex_1, int vertex_2, int v);
 int find_ult_parent(int *parent, int node);
 
 int * disjoint_set(struct edge *arr, int e, int v)
@@ -27,27 +27,27 @@ int * disjoint_set(struct edge *arr, int e, int v)
         printf("%d ",parent[i]);
     }
 
-    union_by_rank(parent, rank, arr, v, e);
-
-    free(rank);
-    return parent;
-}
-
-
-void union_by_rank(int *parent, int *rank, struct edge *arr, int v, int e)
-{
-     // Union By Rank
     for(int i=0; i<e; i++)
     {
         int vertex_1 = arr[i].u;
         int vertex_2 = arr[i].v;
 
+        union_by_rank(parent, rank, vertex_1, vertex_2, v);
+    }
+    free(rank);
+    return parent;
+}
+
+
+void union_by_rank(int *parent, int *rank, int vertex_1, int vertex_2, int v)
+{
+     // Union By Rank
         int ult_parent_u = find_ult_parent(parent, vertex_1);
         int ult_parent_v = find_ult_parent(parent, vertex_2);
 
         if(ult_parent_u == ult_parent_v)
         {
-            continue;
+            return;
         }
 
         if( rank[ult_parent_u] < rank[ult_parent_v] )
@@ -68,7 +68,6 @@ void union_by_rank(int *parent, int *rank, struct edge *arr, int v, int e)
         {
             printf("%d ",parent[k]);
         }
-    }
 }
 
 int find_ult_parent(int *parent, int node)
