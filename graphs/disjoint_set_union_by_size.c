@@ -8,7 +8,7 @@ struct edge
 };
 
 int * disjoint_set(struct edge *arr, int v, int e);
-void union_by_size(struct edge *arr, int * parent, int *size, int v, int e);
+void union_by_size(int * parent, int *size, int vertex_1, int vertex_2, int v);
 int find_ult_parent(int *parent, int node);
 
 int * disjoint_set(struct edge *arr, int v, int e)
@@ -26,27 +26,28 @@ int * disjoint_set(struct edge *arr, int v, int e)
     {
         printf("%d ",parent[i]);
     }
+    for(int i=0; i<e; i++)
+    {
+        int vertex_1 = arr[i].u;
+        int vertex_2 = arr[i].v;
 
-    union_by_size(arr, parent, size, v, e);
+        union_by_size(parent, size, vertex_1, vertex_2, v);
+    }
     
     free(size);
     return parent;
 }
 
-void union_by_size(struct edge *arr, int * parent, int *size, int v, int e)
+void union_by_size(int * parent, int *size, int vertex_1, int vertex_2, int v)
 {
     // Union By Size
-    for(int i=0; i<e; i++)
-    {
-        int vertex_1 = arr[i].u;
-        int vertex_2 = arr[i].v;
 
         int ult_parent_u = find_ult_parent(parent, vertex_1);
         int ult_parent_v = find_ult_parent(parent, vertex_2);
 
         if(ult_parent_u == ult_parent_v)
         {
-            continue;
+            return;
         }
         if( size[ult_parent_u] < size[ult_parent_v] )
         {
@@ -63,7 +64,6 @@ void union_by_size(struct edge *arr, int * parent, int *size, int v, int e)
         {
             printf("%d ",parent[k]);
         }
-    }
 }
 
 
