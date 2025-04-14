@@ -8,6 +8,7 @@ struct edge
 };
 
 int * disjoint_set(struct edge *arr, int v, int e);
+void union_by_size(struct edge *arr, int * parent, int *size, int v, int e);
 int find_ult_parent(int *parent, int node);
 
 int * disjoint_set(struct edge *arr, int v, int e)
@@ -25,7 +26,15 @@ int * disjoint_set(struct edge *arr, int v, int e)
     {
         printf("%d ",parent[i]);
     }
+
+    union_by_size(arr, parent, size, v, e);
     
+    free(size);
+    return parent;
+}
+
+void union_by_size(struct edge *arr, int * parent, int *size, int v, int e)
+{
     // Union By Size
     for(int i=0; i<e; i++)
     {
@@ -55,9 +64,8 @@ int * disjoint_set(struct edge *arr, int v, int e)
             printf("%d ",parent[k]);
         }
     }
-    free(size);
-    return parent;
 }
+
 
 int find_ult_parent(int *parent, int node)
 {
