@@ -22,9 +22,10 @@ int mean(int row, int col, int arr[row][col], int sub_row, int sub_col)
                 printf("\n");
             }
 
-            int mean = sum/(sub_row * sub_col);
-            if(mean == 7)
+            float mean =  (float)sum / (sub_row * sub_col) ;
+            if(mean == 7.0)
             {
+                printf("\nsum is : %d \nno.of elements is : %d \nMean is : %f", sum, sub_row * sub_col, mean);
                 return 1;
             }
         }
@@ -46,6 +47,15 @@ int main()
         {
             scanf("%d",&arr[i][j]);
         }
+    }
+
+        for(int i=0;i<row;i++)
+    {
+        for(int j=0;j<col;j++)
+        {
+            printf("%d ",arr[i][j]);
+        }
+        printf("\n");
     }
 
     printf("\n enter the sub_row and sub_col : ");
